@@ -7,8 +7,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
-// import Team from './components/team/Team';
-// import Contact from './components/contact/Contact';
+import Team from './components/team/Team';
+import Contact from './components/contact/Contact';
+import Home from './components/home/Home';
+import Header from './components/common/heading/Header';
 
 
 function App() {
@@ -19,8 +21,9 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<LoginSignup />} />
-          {/* <Route path='/team' element={<Team />} /> */}
-          {/* <Route path='/contact' element={<Contact />} /> */}
+          <Route path='/home' element={<Home />} />
+          <Route path='/team' element={<Team />} /> 
+          <Route path='/contact' element={<Contact />} />
         </Routes>
       </Router>
 
