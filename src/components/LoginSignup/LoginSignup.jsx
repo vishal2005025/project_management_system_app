@@ -3,55 +3,97 @@ import './LoginSignup.css'
 import user_icon from '../assets/person.png'
 import email_icon from '../assets/email.png'
 import password_icon from '../assets/password.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Chatabot from '../chatbot/Chatabot'
+import { toast } from 'react-toastify';
 
 const LoginSignup = () => {
-  const [action, setAction] = useState("Login");
+
+  const [id, idchange] = useState("");
+  const [name, namechange] = useState("");
+  const [password, passwordchange] = useState("");
+
+  const navigate = useNavigate();
+
+  const IsValidate = () => {
+    let isproceed = true;
+    let errormessage = 'Please enter the value in';
+    if (id === null || id === '') {
+      isproceed = false;
+      errormessage += ' Emailid';
+    }
+    if (password === null || password === '') {
+      isproceed = false;
+      errormessage += ' password';
+    }
+    if (name === null || name === '') {
+      isproceed = false;
+      errormessage += ' username';
+    }
+    if (!isproceed) {
+      toast.warning(errormessage)
+    }
+    return isproceed;
+  }
+
+  const handlesubmit = (e) => {
+    
+      e.preventDefault();
+
+      let regobj = { name, password, id };
+      // console.log(regobj);
+
+      if (IsValidate()) {
+      fetch("http://localhost:8000/user", {
+        method: "POST",
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(regobj)
+      }).then((res) => {
+        toast.success('Registered Successfully.');
+        navigate('/home');
+      }).catch((err) => {
+        toast.error('Failed :' + err.message);
+      });
+    }
+  }
 
   return (
     <>
-    
-<div className='login1'>
-<Chatabot/>
-  <div className='containerL'>
-    <div className="headerL">
-      <div className="textL">{action}</div>
-      <div className="underlineL"></div>
-    </div>
 
-    <div className="inputs">
-      {action === "Login" ? <div></div> : <div className="input">
-        <img src={user_icon} alt="" />
-        <input type="text" placeholder='Name' />
-      </div>}
+      <div className='login1'>
+        <Chatabot />
+        <form className='containerL' onSubmit={handlesubmit} >
+          <div className="headerL">
+            <div className="textL"> Sign up</div>
+            <div className="underlineL"></div>
+          </div>
 
-      <div className="input">
-        <img src={email_icon} alt="" />
-        <input type="email" placeholder='Email Id' />
+          <div className="inputs">
+             <div className="input">
+              <img src={user_icon} alt="" />
+              <input type="text" placeholder='Name' value={name} onChange={e => namechange(e.target.value)} />
+            </div>
+
+            <div className="input">
+              <img src={email_icon} alt="" />
+              <input type="email" placeholder='Email Id' value={id} onChange={e => idchange(e.target.value)} />
+            </div>
+
+            <div className="input">
+              <img src={password_icon} alt="" />
+              <input type="password" placeholder='Password' value={password} onChange={e => passwordchange(e.target.value)} />
+            </div>
+          </div>
+
+          <div className='sub'>
+            <button>Submit</button>
+          </div>
+
+
+        </form>
+
+
       </div>
-
-      <div className="input">
-        <img src={password_icon} alt="" />
-        <input type="password" placeholder='Password' />
-      </div>
-    </div>
-
-    {action === "Sign Up" ? <div></div> : <div className="forget-password">Lost Password? <span>Click Here!</span></div>}
-    <div className="submit-container">
-      <div className={action === "Login" ? "submit gray" : "submit"} onClick={() => { setAction("Sign Up") }}> Sign Up</div>
-      <div className={action === "Sign Up" ? "submit gray" : "submit"} onClick={() => { setAction("Login") }}>Login</div>
-    </div>
-
-    <div className='sub'>
-      <Link to='/home'><button>Submit</button></Link>
-    </div>
-
-
-  </div>
-  
-
-</div>
 
 
     </>

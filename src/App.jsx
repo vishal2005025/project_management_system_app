@@ -11,6 +11,7 @@ import Team from './components/team/Team';
 import Contact from './components/contact/Contact';
 import Home from './components/home/Home';
 import Header from './components/common/heading/Header';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <Router>
+        <ToastContainer></ToastContainer>
         <Routes>
           <Route path='/' element={<LoginSignup />} />
           <Route path='/home' element={<Home />} />

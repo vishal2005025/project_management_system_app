@@ -86,10 +86,6 @@
 
 }
 
-.forget-password span {
-    cursor: pointer;
-    color: red;
-}
 
 .submit-container {
     display: flex;
@@ -135,7 +131,7 @@
 
 .sub button:hover {
     color: #fff;
-    background-color: red;
+    background-color:rgb(25, 216, 216);
 }
 
 @media screen and (max-width: 800px) {
