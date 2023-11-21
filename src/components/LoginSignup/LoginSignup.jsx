@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 const LoginSignup = () => {
 
   const [id, idchange] = useState("");
-  const [name, namechange] = useState("");
+  const [email, emailchange] = useState("");
   const [password, passwordchange] = useState("");
 
   const navigate = useNavigate();
@@ -20,15 +20,15 @@ const LoginSignup = () => {
     let errormessage = 'Please enter the value in';
     if (id === null || id === '') {
       isproceed = false;
-      errormessage += ' Emailid';
+      errormessage += ' username';
     }
     if (password === null || password === '') {
       isproceed = false;
       errormessage += ' password';
     }
-    if (name === null || name === '') {
+    if (email === null || email === '') {
       isproceed = false;
-      errormessage += ' username';
+      errormessage += ' email';
     }
     if (!isproceed) {
       toast.warning(errormessage)
@@ -37,20 +37,20 @@ const LoginSignup = () => {
   }
 
   const handlesubmit = (e) => {
-    
-      e.preventDefault();
 
-      let regobj = { name, password, id };
-      // console.log(regobj);
+    e.preventDefault();
 
-      if (IsValidate()) {
+    let regobj = { email, password, id };
+    // console.log(regobj);
+
+    if (IsValidate()) {
       fetch("http://localhost:8000/user", {
         method: "POST",
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(regobj)
       }).then((res) => {
         toast.success('Registered Successfully.');
-        navigate('/home');
+        navigate('/login');
       }).catch((err) => {
         toast.error('Failed :' + err.message);
       });
@@ -69,14 +69,14 @@ const LoginSignup = () => {
           </div>
 
           <div className="inputs">
-             <div className="input">
+            <div className="input">
               <img src={user_icon} alt="" />
-              <input type="text" placeholder='Name' value={name} onChange={e => namechange(e.target.value)} />
+              <input type="text" placeholder='Name' value={id} onChange={e => idchange(e.target.value)} />
             </div>
 
             <div className="input">
               <img src={email_icon} alt="" />
-              <input type="email" placeholder='Email Id' value={id} onChange={e => idchange(e.target.value)} />
+              <input type="email" placeholder='Email Id' value={email} onChange={e => emailchange(e.target.value)} />
             </div>
 
             <div className="input">
@@ -85,10 +85,14 @@ const LoginSignup = () => {
             </div>
           </div>
 
-          <div className='sub'>
-            <button>Submit</button>
-          </div>
-
+          <div className='flex1'>
+            <div className='sub1'>
+              <button>Submit</button>
+            </div>
+            <Link to='/login' ><div className='sub2'>
+              Old user
+            </div></Link>
+            </div>
 
         </form>
 

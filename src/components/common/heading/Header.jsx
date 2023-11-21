@@ -1,10 +1,19 @@
 import React, { useState } from "react"
 import Head from './Head'
 import "./header.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 const Header = () => {
+
+  const usenavigate = useNavigate();
   const [click, setClick] = useState(false)
+  useEffect(()=>{
+    let username=sessionStorage.getItem('username');
+    if(username==='' || username===null){
+      usenavigate('/login');
+    }
+  },[]);
 
   return (
     <>

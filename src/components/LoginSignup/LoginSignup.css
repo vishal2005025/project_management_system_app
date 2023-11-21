@@ -131,7 +131,65 @@
 
 .sub button:hover {
     color: #fff;
-    background-color:rgb(25, 216, 216);
+    background-color: rgb(25, 216, 216);
+}
+
+
+.login2 {
+    background-image: url("../../../public/images/p10.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    padding-top: 20vh;
+}
+
+.sub1 button:hover {
+    color: #fff;
+    background-color: rgb(25, 216, 216);
+}
+
+.sub1 button {
+    width: 18vw;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #e3dcdc;
+    color: #676767;
+
+}
+
+
+.sub2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18vw;
+    height: 50px;
+    color: #676767;
+    background: #e3dcdc;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.4s;
+    margin-top: 31px;
+}
+
+.sub2:hover {
+    background-color: rgb(25, 216, 216);
+    color: #fff;
+}
+
+.flex1 {
+    display: flex;
+    gap: 30px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 800px) {
